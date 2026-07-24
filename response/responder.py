@@ -223,16 +223,41 @@ def get_event_pids(event):
 
 
 def handle_event(event, whitelist):
-    pids = get_event_pids(event)
+    raw_processes = event.get("suspect_processes", [])
 
-    if not pids:
+    if event.get("pid") is not None:
+        raw_processes = [event.get("pid")] + raw_processes
+
+    if not raw_processes:
         print(
-            f"[responder] no valid PID found for event: "
+            f"[responder] No suspect processes found for event: "
             f"{event.get('path')}"
         )
         return
 
-    for pid in pids:
+    processed_pids = set()
+
+    for process_entry in raw_processes:
+        expected_name = None
+
+        if isinstance(process_entry, dict):
+            pid = process_entry.get("pid")
+            expected_name = process_entry.get("name")
+        else:
+            pid = process_entry
+
+        if not isinstance(pid, int):
+            print(
+                f"[responder] skipping invalid process entry: "
+                f"{process_entry}"
+            )
+            continue
+
+        if pid in processed_pids:
+            continue
+
+        processed_pids.add(pid)
+
         name, cmdline, exists = get_process_info(pid)
 
         if not exists:
@@ -243,14 +268,10 @@ def handle_event(event, whitelist):
             }
 
             append_outcome(event, outcome)
-
-            print(
-                f"[responder] did not freeze PID {pid}: "
-                f"process does not exist"
-            )
+            print(f"[responder] PID {pid} no longer exists")
             continue
 
-        whitelisted, whitelist_reason = is_whitelisted(
+        whitelisted, reason = is_whitelisted(
             pid,
             name,
             cmdline,
@@ -258,27 +279,30 @@ def handle_event(event, whitelist):
         )
 
         if whitelisted:
+            print(
+                f"[responder] SKIPPING PID {pid} -- "
+                f"whitelisted ({reason})"
+            )
+
             outcome = {
                 "success": False,
-                "reason": f"whitelisted: {whitelist_reason}",
+                "reason": f"whitelisted: {reason}",
                 "pid": pid,
                 "process_name": name,
                 "cmdline": cmdline
             }
 
             append_outcome(event, outcome)
-
-            print(
-                f"[responder] SKIPPING PID {pid}: "
-                f"{whitelist_reason}"
-            )
             continue
 
-        print(f"[responder] freezing PID {pid} ({name})")
+        if expected_name is None:
+            expected_name = name
+
+        print(f"[responder] freezing PID {pid} ({name}) ...")
 
         outcome = freeze_pid(
             pid,
-            expected_name=name
+            expected_name=expected_name
         )
 
         append_outcome(event, outcome)
@@ -290,7 +314,7 @@ def handle_event(event, whitelist):
             )
         else:
             print(
-                f"[responder] did not freeze PID {pid}: "
+                f"[responder] did NOT freeze PID {pid}: "
                 f"{outcome['reason']}"
             )
 
