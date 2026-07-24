@@ -23,3 +23,8 @@ instance/
 Thumbs.db
 .vscode/
 .idea/
+
+# local testing scratch — detection_engine
+detection_engine/_sandbox/
+events.jsonl
+detection_engine/**/canaries/
