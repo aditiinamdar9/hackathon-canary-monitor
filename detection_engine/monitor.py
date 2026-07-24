@@ -203,12 +203,10 @@ class CanaryHandler(FileSystemEventHandler):
             # as you prefer. Skipping keeps this part focused.
             return
 
-        # 1) Grab the PID *immediately* — the handle won't stay open long.
-        pids = resolve_pids(path, entry.get("inode"))
-
-        # 2) Now confirm real tampering by re-hashing.
-        current_hash = sha256_file(path)
         expected = entry["sha256"]
+        current_hash = sha256_file(path)
+
+        pids = resolve_pids(path, entry.get("inode"))
 
         if action == "deleted" or current_hash is None:
             tampered = True
