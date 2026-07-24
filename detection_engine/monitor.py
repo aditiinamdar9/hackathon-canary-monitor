@@ -202,20 +202,26 @@ class CanaryHandler(FileSystemEventHandler):
             # note) is suspicious too, but not a manifest canary — skip or log
             # as you prefer. Skipping keeps this part focused.
             return
+        dest = getattr(event, "dest_path", None)
+        dest = str(Path(dest).resolve()) if dest else None
 
+        # 1) Hash FIRST. Takes milliseconds, and it's the evidence that
+        #    confirms tampering. On macOS psutil.open_files() can take
+        #    seconds per call, and by the time it returns the attacker has
+        #    often renamed the file away — losing the hash AND the PID.
         expected = entry["sha256"]
-        current_hash = sha256_file(path)
+        current_hash = sha256_file(dest) if dest else sha256_file(path)
 
+        # 2) Then chase the PID with whatever time is left.
         pids = resolve_pids(path, entry.get("inode"))
 
-        if action == "deleted" or current_hash is None:
-            tampered = True
+        if action == "moved" and dest:
+            reason = f"renamed to {Path(dest).name}"
+        elif action == "deleted" or current_hash is None:
             reason = "file deleted or unreadable"
         elif current_hash != expected:
-            tampered = True
             reason = "hash mismatch"
         else:
-            # Benign touch: ls, stat, open-for-read, atime update, etc.
             return
 
         # Debounce duplicate events (editors/ransomware often fire
@@ -234,6 +240,7 @@ class CanaryHandler(FileSystemEventHandler):
             "observed_sha256": current_hash,
             "reason": reason,
             "suspect_processes": pids,   # may be [] if the handle closed first
+            "dest_path": dest
         }
         self._append_event(record)
 
