@@ -1,0 +1,570 @@
+
+[2026-07-24 14:24:14.535692]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Personal_photo.jpg
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:24:16.546109]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Personal_photo.jpg
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:24:19.556031]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/passwords.txt
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:24:21.561485]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/passwords.txt
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:24:24.572382]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Projects/project_notes.docx
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:24:26.577463]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Projects/project_notes.docx
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:24:28.583687]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/HR/employee_records.csv
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:24:31.589450]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/HR/employee_records.csv
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:24:33.598606]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Finance/Q3_financials.xlsx
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:24:36.613171]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Finance/Q3_financials.xlsx
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:43:45.652293]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Personal_photo.jpg
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:43:47.661340]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Personal_photo.jpg
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:43:50.674544]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/passwords.txt
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:43:52.680845]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/passwords.txt
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:43:55.693569]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Projects/project_notes.docx
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:43:57.704044]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Projects/project_notes.docx
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:44:00.713870]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/HR/employee_records.csv
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:44:02.716458]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/HR/employee_records.csv
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:44:05.730157]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Finance/Q3_financials.xlsx
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:44:07.736294]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Finance/Q3_financials.xlsx
+
+Reason:
+file deleted or unreadable
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:54:04.030269]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Personal_photo.jpg
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:54:07.042831]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Personal_photo.jpg
+
+Reason:
+renamed to Personal_photo.jpg.locked
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:54:09.053201]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/passwords.txt
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:54:12.064355]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/passwords.txt
+
+Reason:
+renamed to passwords.txt.locked
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:54:14.072691]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Projects/project_notes.docx
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:54:17.085623]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Projects/project_notes.docx
+
+Reason:
+renamed to project_notes.docx.locked
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:54:19.094511]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/HR/employee_records.csv
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:54:22.102019]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/HR/employee_records.csv
+
+Reason:
+renamed to employee_records.csv.locked
+
+Action:
+moved
+
+--------------------------------
+
+
+[2026-07-24 14:54:24.108014]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Finance/Q3_financials.xlsx
+
+Reason:
+file deleted or unreadable
+
+Action:
+modified
+
+--------------------------------
+
+
+[2026-07-24 14:54:27.116895]
+
+SECURITY ALERT
+
+Severity:
+LOW
+
+File:
+/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/sandbox/Finance/Q3_financials.xlsx
+
+Reason:
+renamed to Q3_financials.xlsx.locked
+
+Action:
+moved
+
+--------------------------------
+
