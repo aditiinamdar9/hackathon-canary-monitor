@@ -3,7 +3,18 @@ from pathlib import Path
 from flask import Flask, jsonify, render_template
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-EVENTS_PATH = PROJECT_ROOT / "detection_engine" / "events.jsonl"
+
+EVENTS_PATH = (
+    PROJECT_ROOT
+    / "detection_engine"
+    / "events.jsonl"
+)
+
+INCIDENTS_PATH = (
+    PROJECT_ROOT
+    / "alerting"
+    / "incidents.log"
+)
 
 app = Flask(__name__)
 
@@ -31,15 +42,62 @@ def latest_event():
     if not EVENTS_PATH.exists():
         return None
 
-    lines = EVENTS_PATH.read_text(encoding="utf-8").splitlines()
+    try:
+        lines = EVENTS_PATH.read_text(
+            encoding="utf-8"
+        ).splitlines()
+    except OSError:
+        return None
 
     for line in reversed(lines):
         try:
             event = json.loads(line)
-            event["risk_score"] = calculate_risk(event)
+
+            if "risk_score" not in event:
+                event["risk_score"] = calculate_risk(event)
+
             return event
+
         except json.JSONDecodeError:
             continue
+
+    return None
+
+
+def latest_response(event):
+    if event is None or not INCIDENTS_PATH.exists():
+        return None
+
+    try:
+        lines = INCIDENTS_PATH.read_text(
+            encoding="utf-8"
+        ).splitlines()
+    except OSError:
+        return None
+
+    for line in reversed(lines):
+        try:
+            incident = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+
+        correlated_event = incident.get(
+            "correlated_event",
+            {}
+        )
+
+        same_path = (
+            correlated_event.get("path")
+            == event.get("path")
+        )
+
+        same_time = (
+            correlated_event.get("detected_at")
+            == event.get("timestamp")
+        )
+
+        if same_path and same_time:
+            return incident.get("response")
 
     return None
 
@@ -56,12 +114,16 @@ def get_latest_event():
     if event is None:
         return jsonify({
             "status": "protected",
-            "event": None
+            "event": None,
+            "response": None
         })
+
+    response = latest_response(event)
 
     return jsonify({
         "status": "threat",
-        "event": event
+        "event": event,
+        "response": response
     })
 
 

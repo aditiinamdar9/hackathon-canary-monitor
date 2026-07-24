@@ -21,134 +21,90 @@
             padding: 20px 6%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #37394f;
-            background: #171824;
+            border-bottom: 1px solid #393a50;
         }
 
         header h2 {
             margin: 0;
             color: #b8a7ff;
-            letter-spacing: 2px;
         }
 
-        header span {
+        header span,
+        .label,
+        p {
             color: #aaaabd;
-            font-size: 13px;
         }
 
         main {
-            width: min(1000px, 90%);
+            width: min(900px, 90%);
             margin: 50px auto;
         }
 
-        .status {
+        #status {
             color: #b8a7ff;
             font-weight: bold;
-            text-transform: uppercase;
         }
 
         h1 {
             margin: 15px 0;
-            font-size: clamp(42px, 7vw, 65px);
+            font-size: clamp(40px, 7vw, 62px);
         }
 
-        .description {
-            max-width: 650px;
-            color: #b6b6c8;
-            line-height: 1.6;
-        }
-
-        .cards {
-            margin-top: 35px;
+        .cards,
+        .details {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
         }
 
-        .card {
+        .cards {
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 35px;
+        }
+
+        .details {
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 20px;
+        }
+
+        .card,
+        .event {
             padding: 22px;
-            border: 1px solid #37394f;
-            border-radius: 10px;
+            border: 1px solid #393a50;
+            border-radius: 9px;
             background: #1c1e2d;
         }
 
-        .card span {
+        .card strong,
+        .label,
+        .detail strong,
+        .detail span {
             display: block;
-            color: #aaaabd;
-            font-size: 12px;
-            text-transform: uppercase;
         }
 
         .card strong {
-            display: block;
             margin-top: 10px;
-            font-size: 25px;
+            font-size: 24px;
         }
 
         .event {
             margin-top: 15px;
-            padding: 25px;
-            border: 1px solid #37394f;
-            border-radius: 10px;
-            background: #1c1e2d;
-        }
-
-        .event-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .event-header h2 {
-            margin: 0;
-        }
-
-        .risk {
-            padding: 6px 10px;
-            border-radius: 6px;
-            color: #b8a7ff;
-            background: #b8a7ff18;
-            font-size: 12px;
-            font-weight: bold;
         }
 
         .file {
-            margin-top: 20px;
+            margin-top: 18px;
             padding: 15px;
-            border-radius: 7px;
             background: #151621;
-        }
-
-        .file span,
-        .file strong {
-            display: block;
-        }
-
-        .file span {
-            color: #aaaabd;
-            font-size: 11px;
-        }
-
-        .file strong {
-            margin-top: 7px;
             overflow-wrap: anywhere;
         }
 
-        .details {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+        .file strong {
+            display: block;
+            margin-top: 6px;
         }
 
         .detail span,
-        .detail strong {
-            display: block;
-        }
-
-        .detail span {
-            margin-bottom: 7px;
+        .label {
+            margin-bottom: 6px;
             color: #aaaabd;
             font-size: 11px;
         }
@@ -158,17 +114,26 @@
             overflow-wrap: anywhere;
         }
 
-        .threat .status {
-            color: #ff8098;
+        #frozen {
+            display: none;
+            margin-top: 20px;
+            padding: 14px;
+            border: 1px solid #b8a7ff;
+            border-radius: 7px;
+            color: #d9d0ff;
+            background: #b8a7ff12;
+            font-weight: bold;
         }
 
-        .threat .risk {
+        .threat #status {
             color: #ff8098;
-            background: #ff809818;
         }
 
         @media (max-width: 700px) {
-            .cards,
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
             .details {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -183,42 +148,35 @@
     </header>
 
     <main id="dashboard">
-        <section>
-            <div id="status" class="status">System protected</div>
-
-            <h1 id="headline">No threats detected.</h1>
-
-            <p id="description" class="description">
-                The system is monitoring the sandbox for changes to the canary
-                files.
-            </p>
-        </section>
+        <div id="status">SYSTEM PROTECTED</div>
+        <h1 id="headline">No threats detected.</h1>
+        <p id="description">
+            Monitoring the sandbox for changes to canary files.
+        </p>
 
         <section class="cards">
             <div class="card">
-                <span>Protected files</span>
+                <span class="label">Protected files</span>
                 <strong>5</strong>
             </div>
 
             <div class="card">
-                <span>Risk score</span>
-                <strong id="risk-score">0 / 100</strong>
+                <span class="label">Risk score</span>
+                <strong id="risk">0 / 100</strong>
             </div>
 
             <div class="card">
-                <span>Monitor</span>
+                <span class="label">Monitor</span>
                 <strong>Online</strong>
             </div>
         </section>
 
         <section class="event">
-            <div class="event-header">
-                <h2 id="event-title">Latest event</h2>
-            </div>
+            <h2>Latest event</h2>
 
             <div class="file">
-                <span>Affected file</span>
-                <strong id="file-path">No file changes detected</strong>
+                <span class="label">Affected file</span>
+                <strong id="path">No file changes detected</strong>
             </div>
 
             <div class="details">
@@ -229,7 +187,7 @@
 
                 <div class="detail">
                     <span>Time</span>
-                    <strong id="timestamp">—</strong>
+                    <strong id="time">—</strong>
                 </div>
 
                 <div class="detail">
@@ -242,89 +200,67 @@
                     <strong id="pid">—</strong>
                 </div>
             </div>
+
+            <div id="frozen">✓ Process frozen successfully</div>
         </section>
     </main>
 
     <script>
-        function showProtected() {
-            const dashboard = document.getElementById("dashboard");
+        const get = id => document.getElementById(id);
 
-            dashboard.classList.remove("threat");
-
-            document.getElementById("status").textContent =
-                "System protected";
-
-            document.getElementById("headline").textContent =
-                "No threats detected.";
-
-            document.getElementById("description").textContent =
-                "The system is monitoring the sandbox for changes to the canary files.";
-
-            document.getElementById("risk-score").textContent =
-                "0 / 100";
-
-            document.getElementById("risk-label").textContent =
-                "Clear";
+        function protectedState() {
+            get("dashboard").classList.remove("threat");
+            get("status").textContent = "SYSTEM PROTECTED";
+            get("headline").textContent = "No threats detected.";
+            get("description").textContent =
+                "Monitoring the sandbox for changes to canary files.";
+            get("risk").textContent = "0 / 100";
+            get("path").textContent = "No file changes detected";
+            get("action").textContent = "—";
+            get("time").textContent = "—";
+            get("process").textContent = "—";
+            get("pid").textContent = "—";
+            get("frozen").style.display = "none";
         }
 
-        function showThreat(event) {
-            const dashboard = document.getElementById("dashboard");
-            const suspects = event.suspect_processes || [];
-            const suspect = suspects.length ? suspects[0] : {};
-            const risk = event.risk_score || 60;
+        function threatState(event, response) {
+            const suspect = (event.suspect_processes || [])[0] || {};
 
-            dashboard.classList.add("threat");
-
-            document.getElementById("status").textContent =
-                "Threat detected";
-
-            document.getElementById("headline").textContent =
-                "A canary file was changed.";
-
-            document.getElementById("description").textContent =
-                "The monitor confirmed that a protected file was modified.";
-
-            document.getElementById("risk-score").textContent =
-                risk + " / 100";
-
-            document.getElementById("event-title").textContent =
-                "Confirmed tampering";
-
-            document.getElementById("file-path").textContent =
-                event.path || "Unknown file";
-
-            document.getElementById("action").textContent =
-                event.action || "Unknown";
-
-            document.getElementById("timestamp").textContent =
-                event.timestamp
-                    ? new Date(event.timestamp).toLocaleTimeString()
-                    : "Unknown";
-
-            document.getElementById("process").textContent =
+            get("dashboard").classList.add("threat");
+            get("status").textContent = "THREAT DETECTED";
+            get("headline").textContent = "A canary file was changed.";
+            get("description").textContent =
+                "The monitor confirmed suspicious file activity.";
+            get("risk").textContent =
+                (event.risk_score || 60) + " / 100";
+            get("path").textContent = event.path || "Unknown";
+            get("action").textContent = event.action || "Unknown";
+            get("time").textContent = event.timestamp
+                ? new Date(event.timestamp).toLocaleTimeString()
+                : "Unknown";
+            get("process").textContent =
                 suspect.name || "Not identified";
-
-            document.getElementById("pid").textContent =
+            get("pid").textContent =
                 suspect.pid || "Not identified";
+            get("frozen").style.display =
+                response && response.success ? "block" : "none";
         }
 
-        async function updateDashboard() {
+        async function update() {
             try {
-                const response = await fetch("/api/latest-event");
-                const data = await response.json();
+                const result = await fetch("/api/latest-event");
+                const data = await result.json();
 
-                if (data.status === "threat" && data.event) {
-                    showThreat(data.event);
-                } else {
-                    showProtected();
-                }
-            } catch (error) {
-                console.log("Waiting for monitor...");
+                data.status === "threat" && data.event
+                    ? threatState(data.event, data.response)
+                    : protectedState();
+            } catch {
+                console.log("Waiting for backend");
             }
         }
 
-        updateDashboard();
-        setInterval(updateDashboard, 1000);
+        update();
+        setInterval(update, 1000);
     </script>
 </body>
 </html>
