@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canary Monitor</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #11121b;
+            color: #f3f1ff;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #393a50;
+        }
+
+        header h2 {
+            margin: 0;
+            color: #b8a7ff;
+        }
+
+        header span,
+        .label,
+        p {
+            color: #aaaabd;
+        }
+
+        main {
+            width: min(900px, 90%);
+            margin: 50px auto;
+        }
+
+        #status {
+            color: #b8a7ff;
+            font-weight: bold;
+        }
+
+        h1 {
+            margin: 15px 0;
+            font-size: clamp(40px, 7vw, 62px);
+        }
+
+        .cards,
+        .details {
+            display: grid;
+            gap: 15px;
+        }
+
+        .cards {
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 35px;
+        }
+
+        .details {
+            grid-template-columns: repeat(4, 1fr);
+            margin-top: 20px;
+        }
+
+        .card,
+        .event {
+            padding: 22px;
+            border: 1px solid #393a50;
+            border-radius: 9px;
+            background: #1c1e2d;
+        }
+
+        .card strong,
+        .label,
+        .detail strong,
+        .detail span {
+            display: block;
+        }
+
+        .card strong {
+            margin-top: 10px;
+            font-size: 24px;
+        }
+
+        .event {
+            margin-top: 15px;
+        }
+
+        .file {
+            margin-top: 18px;
+            padding: 15px;
+            background: #151621;
+            overflow-wrap: anywhere;
+        }
+
+        .file strong {
+            display: block;
+            margin-top: 6px;
+        }
+
+        .detail span,
+        .label {
+            margin-bottom: 6px;
+            color: #aaaabd;
+            font-size: 11px;
+        }
+
+        .detail strong {
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+
+        #frozen {
+            display: none;
+            margin-top: 20px;
+            padding: 14px;
+            border: 1px solid #b8a7ff;
+            border-radius: 7px;
+            color: #d9d0ff;
+            background: #b8a7ff12;
+            font-weight: bold;
+        }
+
+        .threat #status {
+            color: #ff8098;
+        }
+
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2>CANARY MONITOR</h2>
+        <span>● Live monitoring</span>
+    </header>
+
+    <main id="dashboard">
+        <div id="status">SYSTEM PROTECTED</div>
+        <h1 id="headline">No threats detected.</h1>
+        <p id="description">
+            Monitoring the sandbox for changes to canary files.
+        </p>
+
+        <section class="cards">
+            <div class="card">
+                <span class="label">Protected files</span>
+                <strong>5</strong>
+            </div>
+
+            <div class="card">
+                <span class="label">Risk score</span>
+                <strong id="risk">0 / 100</strong>
+            </div>
+
+            <div class="card">
+                <span class="label">Monitor</span>
+                <strong>Online</strong>
+            </div>
+        </section>
+
+        <section class="event">
+            <h2>Latest event</h2>
+
+            <div class="file">
+                <span class="label">Affected file</span>
+                <strong id="path">No file changes detected</strong>
+            </div>
+
+            <div class="details">
+                <div class="detail">
+                    <span>Action</span>
+                    <strong id="action">—</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Time</span>
+                    <strong id="time">—</strong>
+                </div>
+
+                <div class="detail">
+                    <span>Process</span>
+                    <strong id="process">—</strong>
+                </div>
+
+                <div class="detail">
+                    <span>PID</span>
+                    <strong id="pid">—</strong>
+                </div>
+            </div>
+
+            <div id="frozen">✓ Process frozen successfully</div>
+        </section>
+    </main>
+
+    <script>
+        const get = id => document.getElementById(id);
+
+        function protectedState() {
+            get("dashboard").classList.remove("threat");
+            get("status").textContent = "SYSTEM PROTECTED";
+            get("headline").textContent = "No threats detected.";
+            get("description").textContent =
+                "Monitoring the sandbox for changes to canary files.";
+            get("risk").textContent = "0 / 100";
+            get("path").textContent = "No file changes detected";
+            get("action").textContent = "—";
+            get("time").textContent = "—";
+            get("process").textContent = "—";
+            get("pid").textContent = "—";
+            get("frozen").style.display = "none";
+        }
+
+        function threatState(event, response) {
+            const suspect = (event.suspect_processes || [])[0] || {};
+
+            get("dashboard").classList.add("threat");
+            get("status").textContent = "THREAT DETECTED";
+            get("headline").textContent = "A canary file was changed.";
+            get("description").textContent =
+                "The monitor confirmed suspicious file activity.";
+            get("risk").textContent =
+                (event.risk_score || 60) + " / 100";
+            get("path").textContent = event.path || "Unknown";
+            get("action").textContent = event.action || "Unknown";
+            get("time").textContent = event.timestamp
+                ? new Date(event.timestamp).toLocaleTimeString()
+                : "Unknown";
+            get("process").textContent =
+                suspect.name || "Not identified";
+            get("pid").textContent =
+                suspect.pid || "Not identified";
+            get("frozen").style.display =
+                response && response.success ? "block" : "none";
+        }
+
+        async function update() {
+            try {
+                const result = await fetch("/api/latest-event");
+                const data = await result.json();
+
+                data.status === "threat" && data.event
+                    ? threatState(data.event, data.response)
+                    : protectedState();
+            } catch {
+                console.log("Waiting for backend");
+            }
+        }
+
+        update();
+        setInterval(update, 1000);
+    </script>
+</body>
+</html>

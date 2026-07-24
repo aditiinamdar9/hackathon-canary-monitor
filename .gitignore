@@ -8,23 +8,25 @@ __pycache__/
 venv/
 env/
 
-# Environment / secrets
+# Secrets
 .env
 .env.*
 !.env.example
 
-# Flask / local data
+# Generated project files
+/manifest.json
+events.jsonl
+incidents.log
+*.pid
+*.locked
+
+# Local databases
 instance/
 *.db
 *.sqlite3
 
-# OS / editors
-.DS_Store
-Thumbs.db
+# Editors and operating systems
 .vscode/
 .idea/
-
-# local testing scratch — detection_engine
-detection_engine/_sandbox/
-events.jsonl
-detection_engine/**/canaries/
+.DS_Store
+Thumbs.db
