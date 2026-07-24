@@ -3,7 +3,7 @@ from pathlib import Path
 from flask import Flask, jsonify, render_template
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-EVENTS_PATH = PROJECT_ROOT / "events.jsonl"
+EVENTS_PATH = PROJECT_ROOT / "detection_engine" / "events.jsonl"
 
 app = Flask(__name__)
 
