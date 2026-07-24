@@ -177,8 +177,8 @@ def append_outcome(event, outcome):
     record = {
         "correlated_event": {
             "path": event.get("path"),
-            "pid": event.get("pid"),
-            "detected_at": event.get("detected_at") or event.get("timestamp"),
+            "suspect_processes": event.get("suspect_processes", []),
+            "detected_at": event.get("timestamp"),
         },
         "response": {
             "action": "freeze" if outcome["success"] else "freeze_attempt_failed",
@@ -224,10 +224,45 @@ def tail_events(path, whitelist):
 
 
 def handle_event(event, whitelist):
-    pid = event.get("pid")
-    if pid is None:
-        print(f"[responder] event has no pid, cannot respond: {event}")
+    pids = event.get("suspect_processes", [])
+
+    if not pids:
+        print(f"[responder] No suspect processes found for event: {event.get('path')}")
         return
+
+    for pid in pids:
+        detector_name, detector_cmdline, exists = get_process_info(pid)
+
+        whitelisted, reason = is_whitelisted(
+            pid,
+            detector_name,
+            detector_cmdline,
+            whitelist
+        )
+
+        if whitelisted:
+            print(f"[responder] SKIPPING pid {pid} -- whitelisted ({reason})")
+            outcome = {
+                "success": False,
+                "reason": f"whitelisted: {reason}",
+                "pid": pid
+            }
+            append_outcome(event, outcome)
+            continue
+
+        print(f"[responder] freezing pid {pid} ({detector_name}) ...")
+
+        outcome = freeze_pid(
+            pid,
+            expected_name=detector_name
+        )
+
+        append_outcome(event, outcome)
+
+        if outcome["success"]:
+            print(f"[responder] FROZEN pid {pid}: {outcome['reason']}")
+        else:
+            print(f"[responder] did NOT freeze pid {pid}: {outcome['reason']}")
 
     detector_name, detector_cmdline, exists = get_process_info(pid)
     whitelisted, reason = is_whitelisted(pid, detector_name, detector_cmdline, whitelist)

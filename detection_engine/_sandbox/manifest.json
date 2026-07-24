@@ -1,14 +1,14 @@
 {
-  "/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/detection_engine/_sandbox/canaries/passwords.txt": {
+  "/Users/aishinanda/hackathon-canary-monitor/canaries/passwords.txt": {
     "sha256": "0f1794ab56c04c9e5ea99d77d39aee4dc5bc4b4c9b7be0bb57e0a92cd6233ec7",
-    "inode": 148477519
+    "inode": 54787990
   },
-  "/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/detection_engine/_sandbox/canaries/budget_2026.csv": {
+  "/Users/aishinanda/hackathon-canary-monitor/canaries/budget_2026.csv": {
     "sha256": "025f6239f4bbd427616a631c3a86b954af9b1b262664e1a69735c9e57a36750a",
-    "inode": 148477520
+    "inode": 54787991
   },
-  "/Users/Aditi/BWSI CyberOps/hackathon-canary-monitor/detection_engine/_sandbox/canaries/secret_recipe.txt": {
+  "/Users/aishinanda/hackathon-canary-monitor/canaries/secret_recipe.txt": {
     "sha256": "aa72d103f4123a2fc6986b04dd33f54334b85482b46b79e4db21ba7351691dce",
-    "inode": 148477521
+    "inode": 54787992
   }
 }
