@@ -1,0 +1,34 @@
+{
+  "_comment": "Safety rail: responder.py will refuse to freeze anything matching these. Match by process NAME and/or resolved EXE PATH, not just PID, since PIDs are reused. Add your shell, IDE, debugger, and any process that legitimately touches the canary dir (e.g. baseline.py, monitor.py themselves) here.",
+
+  "protected_names": [
+    "systemd",
+    "init",
+    "bash",
+    "zsh",
+    "sh",
+    "python3.11",
+    "code",
+    "code-insiders",
+    "Xorg",
+    "sshd",
+    "NetworkManager",
+    "gnome-shell",
+    "explorer.exe",
+    "dockerd"
+  ],
+
+  "protected_exact_cmdline_substrings": [
+    "generate_canaries.py",
+    "baseline.py",
+    "monitor.py",
+    "listener.py",
+    "responder.py"
+  ],
+
+  "protected_pids": [
+    1
+  ],
+
+  "notes": "protected_pids should really only ever contain PID 1 (init) as a hardcoded floor. Everything else is matched dynamically at freeze-time via process name and cmdline, since hardcoding PIDs of your own tools is fragile across restarts."
+}
