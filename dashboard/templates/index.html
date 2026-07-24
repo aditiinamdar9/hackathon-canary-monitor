@@ -214,7 +214,6 @@
         <section class="event">
             <div class="event-header">
                 <h2 id="event-title">Latest event</h2>
-                <span id="risk-label" class="risk">Clear</span>
             </div>
 
             <div class="file">
@@ -287,9 +286,6 @@
 
             document.getElementById("risk-score").textContent =
                 risk + " / 100";
-
-            document.getElementById("risk-label").textContent =
-                risk >= 85 ? "Critical" : "Elevated";
 
             document.getElementById("event-title").textContent =
                 "Confirmed tampering";
