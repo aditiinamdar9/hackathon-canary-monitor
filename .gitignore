@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Flask / local data
+instance/
+*.db
+*.sqlite3
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

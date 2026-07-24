@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - MAIN
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: drhscit.org
+          port: 4243
+          username: att1086
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/att1086/www
+            git pull origin MAIN
+            sudo systemctl reload att1086
